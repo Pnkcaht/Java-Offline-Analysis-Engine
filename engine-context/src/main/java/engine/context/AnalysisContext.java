@@ -2,6 +2,7 @@ package engine.context;
 
 import engine.model.graph.CallGraph;
 import engine.model.graph.DependencyGraph;
+import engine.report.Report;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +12,8 @@ import java.util.Optional;
 /**
  * Mutable execution context shared across pipeline stages.
  *
- * <p>Holds analysis state and intermediate results.
- * The final Report is NOT part of the context.</p>
+ * <p>Holds analysis state, intermediate results,
+ * and the final Report produced by the pipeline.</p>
  */
 public final class AnalysisContext {
 
@@ -23,6 +24,9 @@ public final class AnalysisContext {
     // === core graphs ===
     private CallGraph callGraph;
     private DependencyGraph dependencyGraph;
+
+    // === final output ===
+    private Report report;
 
     // === analysis results (metrics, surfaces, etc.) ===
     private final Map<Class<?>, Object> results = new HashMap<>();
@@ -67,6 +71,16 @@ public final class AnalysisContext {
 
     public DependencyGraph dependencyGraph() {
         return dependencyGraph;
+    }
+
+    // === report ===
+
+    public Report report() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = Objects.requireNonNull(report);
     }
 
     // === analysis results ===

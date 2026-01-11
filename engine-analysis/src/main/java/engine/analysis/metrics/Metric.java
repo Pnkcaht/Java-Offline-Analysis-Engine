@@ -1,22 +1,7 @@
-package engine.analysis.surface;
+package engine.analysis.metrics;
 
 /**
- * Represents exposed API surface.
+ * Marker interface for analysis metrics.
  */
-public final class SurfaceArea {
-
-    private int publicClasses;
-
-    public void incrementPublicClasses() {
-        publicClasses++;
-    }
-
-    public int publicClasses() {
-        return publicClasses;
-    }
-
-    @Override
-    public String toString() {
-        return "SurfaceArea[publicClasses=" + publicClasses + "]";
-    }
+public interface Metric {
 }

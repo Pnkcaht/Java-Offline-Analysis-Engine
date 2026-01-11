@@ -1,9 +1,11 @@
 package engine.analysis.surface;
 
+import engine.analysis.metrics.Metric;
+
 /**
  * Represents exposed API surface.
  */
-public final class SurfaceArea {
+public final class SurfaceArea implements Metric {
 
     private int publicClasses;
 

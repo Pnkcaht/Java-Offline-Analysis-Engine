@@ -4,10 +4,8 @@ import engine.analysis.Analysis;
 import engine.context.AnalysisContext;
 import engine.model.element.ClassElement;
 import engine.model.visibility.Visibility;
+import engine.model.visibility.VisibilityResolver;
 
-/**
- * Computes exposed surface area.
- */
 public final class SurfaceAnalysis implements Analysis {
 
     @Override
@@ -15,9 +13,11 @@ public final class SurfaceAnalysis implements Analysis {
         SurfaceArea area = new SurfaceArea();
 
         for (ClassElement clazz : context.classIndex().all()) {
-            if (clazz.visibility() == Visibility.PUBLIC) {
+            if (VisibilityResolver.fromAccess(clazz.getAccessFlags()) == Visibility.PUBLIC) {
                 area.incrementPublicClasses();
             }
         }
+
+        context.putResult(SurfaceArea.class, area);
     }
 }
