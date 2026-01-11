@@ -1,7 +1,7 @@
 package engine.model.graph;
 
 import engine.model.element.MethodElement;
-
+import java.util.stream.Collectors;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;

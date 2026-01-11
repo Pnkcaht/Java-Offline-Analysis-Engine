@@ -26,7 +26,7 @@ public final class ReportStage implements Stage {
                                     Map.of(
                                             "nodes", metrics.nodeCount(),
                                             "edges", metrics.edgeCount(),
-                                            "fanOut", metrics.fanOut().size()
+                                            "fanOutMethods", metrics.fanOut().size()
                                     )
                             )
                     ));
@@ -46,10 +46,11 @@ public final class ReportStage implements Stage {
                 );
             }
 
-            // store report in context for pipeline to return
-            context.putResult(Report.class, new Report(sections));
+            // === store final report ===
+            context.setReport(new Report(sections));
 
             return StageResult.success();
+
         } catch (Exception e) {
             return StageResult.failure(
                     "ReportStage failed: " + e.getMessage()

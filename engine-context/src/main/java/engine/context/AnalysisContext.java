@@ -11,7 +11,8 @@ import java.util.Optional;
 /**
  * Mutable execution context shared across pipeline stages.
  *
- * <p>All mutations are explicit and stage-bound.</p>
+ * <p>Holds analysis state and intermediate results.
+ * The final Report is NOT part of the context.</p>
  */
 public final class AnalysisContext {
 
@@ -19,10 +20,11 @@ public final class AnalysisContext {
     private final SymbolTable symbolTable;
     private final DiagnosticsCollector diagnostics;
 
+    // === core graphs ===
     private CallGraph callGraph;
     private DependencyGraph dependencyGraph;
 
-    // === analysis results ===
+    // === analysis results (metrics, surfaces, etc.) ===
     private final Map<Class<?>, Object> results = new HashMap<>();
 
     public AnalysisContext(
@@ -34,6 +36,8 @@ public final class AnalysisContext {
         this.symbolTable = Objects.requireNonNull(symbolTable);
         this.diagnostics = Objects.requireNonNull(diagnostics);
     }
+
+    // === core services ===
 
     public ClassIndex classIndex() {
         return classIndex;
@@ -50,11 +54,11 @@ public final class AnalysisContext {
     // === graphs ===
 
     public void setCallGraph(CallGraph callGraph) {
-        this.callGraph = callGraph;
+        this.callGraph = Objects.requireNonNull(callGraph);
     }
 
     public void setDependencyGraph(DependencyGraph dependencyGraph) {
-        this.dependencyGraph = dependencyGraph;
+        this.dependencyGraph = Objects.requireNonNull(dependencyGraph);
     }
 
     public CallGraph callGraph() {
@@ -68,7 +72,10 @@ public final class AnalysisContext {
     // === analysis results ===
 
     public <T> void putResult(Class<T> key, T value) {
-        results.put(key, value);
+        results.put(
+                Objects.requireNonNull(key),
+                Objects.requireNonNull(value)
+        );
     }
 
     @SuppressWarnings("unchecked")

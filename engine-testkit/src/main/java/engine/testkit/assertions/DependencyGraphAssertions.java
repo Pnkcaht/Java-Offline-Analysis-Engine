@@ -7,9 +7,15 @@ public final class DependencyGraphAssertions {
     public static void assertNotEmpty(
             DependencyGraph graph
     ) {
+        if (graph == null) {
+            throw new AssertionError(
+                    "DependencyGraph is null"
+            );
+        }
+
         if (graph.getNodes().isEmpty()) {
             throw new AssertionError(
-                    "Dependency graph is empty"
+                    "DependencyGraph has no nodes"
             );
         }
     }

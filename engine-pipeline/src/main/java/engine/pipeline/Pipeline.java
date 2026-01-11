@@ -25,11 +25,13 @@ public final class Pipeline {
             }
         }
 
-        return context.getResult(Report.class)
-                .orElseThrow(() ->
-                        new IllegalStateException(
-                                "Pipeline completed without producing a Report"
-                        )
-                );
+        Report report = context.report();
+        if (report == null) {
+            throw new IllegalStateException(
+                    "Pipeline completed without producing a Report"
+            );
+        }
+
+        return report;
     }
 }

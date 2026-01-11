@@ -8,11 +8,13 @@ public final class CallGraphAssertions {
             CallGraph graph,
             int expected
     ) {
-        if (graph.getNodes().size() != expected) {
+        requireGraph(graph);
+
+        int actual = graph.getNodes().size();
+        if (actual != expected) {
             throw new AssertionError(
-                    "Expected " + expected +
-                            " nodes but got " +
-                            graph.getNodes().size()
+                    "CallGraph node count mismatch: expected "
+                            + expected + " but got " + actual
             );
         }
     }
@@ -21,12 +23,20 @@ public final class CallGraphAssertions {
             CallGraph graph,
             int expected
     ) {
-        if (graph.getEdges().size() != expected) {
+        requireGraph(graph);
+
+        int actual = graph.getEdges().size();
+        if (actual != expected) {
             throw new AssertionError(
-                    "Expected " + expected +
-                            " edges but got " +
-                            graph.getEdges().size()
+                    "CallGraph edge count mismatch: expected "
+                            + expected + " but got " + actual
             );
+        }
+    }
+
+    private static void requireGraph(CallGraph graph) {
+        if (graph == null) {
+            throw new AssertionError("CallGraph is null");
         }
     }
 }

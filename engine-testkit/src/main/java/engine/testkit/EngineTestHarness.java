@@ -9,6 +9,9 @@ import engine.testkit.bytecode.TestClasspath;
 
 import java.util.List;
 
+/**
+ * Executes the analysis pipeline against a test classpath.
+ */
 public final class EngineTestHarness {
 
     public static Report run(TestClasspath classpath) throws Exception {
@@ -36,6 +39,14 @@ public final class EngineTestHarness {
                         ))
                 );
 
-        return pipeline.execute(context);
+        Report report = pipeline.execute(context);
+
+        if (diagnostics.hasErrors()) {
+            throw new IllegalStateException(
+                    "Engine produced diagnostics errors during test execution"
+            );
+        }
+
+        return report;
     }
 }

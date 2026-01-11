@@ -12,14 +12,20 @@ import java.util.Optional;
  */
 public final class ClassIndex {
 
-    private final Map<String, ClassElement> byInternalName = new HashMap<>();
+    private final Map<String, ClassElement> byInternalName =
+            new HashMap<>();
 
     public void register(ClassElement element) {
-        byInternalName.put(element.internalName(), element);
+        byInternalName.put(
+                element.getInternalName(),
+                element
+        );
     }
 
     public Optional<ClassElement> find(String internalName) {
-        return Optional.ofNullable(byInternalName.get(internalName));
+        return Optional.ofNullable(
+                byInternalName.get(internalName)
+        );
     }
 
     public Collection<ClassElement> all() {
