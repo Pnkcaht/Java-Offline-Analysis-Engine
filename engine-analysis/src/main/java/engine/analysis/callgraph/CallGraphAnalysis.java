@@ -19,6 +19,6 @@ public final class CallGraphAnalysis implements Analysis {
         }
 
         CallGraphMetrics metrics = CallGraphMetrics.compute(graph);
-        // resultado será consumido pelo report layer
+        context.putResult(CallGraphMetrics.class, metrics);
     }
 }

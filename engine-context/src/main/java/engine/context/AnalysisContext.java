@@ -2,9 +2,11 @@ package engine.context;
 
 import engine.model.graph.CallGraph;
 import engine.model.graph.DependencyGraph;
-import engine.model.metadata.MetadataContainer;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Mutable execution context shared across pipeline stages.
@@ -19,6 +21,9 @@ public final class AnalysisContext {
 
     private CallGraph callGraph;
     private DependencyGraph dependencyGraph;
+
+    // === analysis results ===
+    private final Map<Class<?>, Object> results = new HashMap<>();
 
     public AnalysisContext(
             ClassIndex classIndex,
@@ -42,6 +47,8 @@ public final class AnalysisContext {
         return diagnostics;
     }
 
+    // === graphs ===
+
     public void setCallGraph(CallGraph callGraph) {
         this.callGraph = callGraph;
     }
@@ -56,5 +63,16 @@ public final class AnalysisContext {
 
     public DependencyGraph dependencyGraph() {
         return dependencyGraph;
+    }
+
+    // === analysis results ===
+
+    public <T> void putResult(Class<T> key, T value) {
+        results.put(key, value);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> Optional<T> getResult(Class<T> key) {
+        return Optional.ofNullable((T) results.get(key));
     }
 }

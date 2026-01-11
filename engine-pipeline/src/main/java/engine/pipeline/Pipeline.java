@@ -1,6 +1,7 @@
 package engine.pipeline;
 
 import engine.context.AnalysisContext;
+import engine.report.Report;
 
 /**
  * Pipeline executor.
@@ -13,7 +14,7 @@ public final class Pipeline {
         this.plan = plan;
     }
 
-    public void run(AnalysisContext context) {
+    public Report execute(AnalysisContext context) {
         for (Stage stage : plan.stages()) {
             StageResult result = stage.execute(context);
 
@@ -23,5 +24,12 @@ public final class Pipeline {
                 break;
             }
         }
+
+        return context.getResult(Report.class)
+                .orElseThrow(() ->
+                        new IllegalStateException(
+                                "Pipeline completed without producing a Report"
+                        )
+                );
     }
 }

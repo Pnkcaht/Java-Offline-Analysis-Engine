@@ -1,15 +1,19 @@
 package engine.cli;
 
+import engine.analysis.callgraph.CallGraphAnalysis;
+import engine.analysis.dependency.DependencyAnalysis;
+import engine.analysis.surface.SurfaceAnalysis;
 import engine.context.AnalysisContext;
+import engine.context.ClassIndex;
 import engine.context.DiagnosticsCollector;
+import engine.context.SymbolTable;
 import engine.io.classpath.ClasspathScanner;
-import engine.pipeline.ExecutionPlan;
-import engine.pipeline.Pipeline;
-import engine.pipeline.PipelineBuilder;
+import engine.pipeline.*;
 import engine.report.*;
 
 import java.io.OutputStream;
 import java.nio.file.Path;
+import java.util.List;
 
 /**
  * Wires the engine together and executes analysis.
@@ -27,7 +31,11 @@ public final class EngineLauncher {
                 new DiagnosticsCollector();
 
         AnalysisContext context =
-                new AnalysisContext(diagnostics);
+                new AnalysisContext(
+                        new ClassIndex(),
+                        new SymbolTable(),
+                        diagnostics
+                );
 
         scanClasspath(options.inputPath(), context);
 
@@ -57,11 +65,23 @@ public final class EngineLauncher {
     }
 
     private Pipeline buildPipeline() {
-        ExecutionPlan plan = new ExecutionPlan();
-
-        return PipelineBuilder.create()
-                .withPlan(plan)
-                .build();
+        return new Pipeline(
+                new ExecutionPlan(List.of(
+                        new AnalysisStage(
+                                "Call Graph Analysis",
+                                new CallGraphAnalysis()
+                        ),
+                        new AnalysisStage(
+                                "Dependency Analysis",
+                                new DependencyAnalysis()
+                        ),
+                        new AnalysisStage(
+                                "Surface Analysis",
+                                new SurfaceAnalysis()
+                        ),
+                        new ReportStage()
+                ))
+        );
     }
 
     private void writeReport(Report report) throws Exception {
