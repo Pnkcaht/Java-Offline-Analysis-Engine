@@ -14,7 +14,7 @@ public final class DependencyAnalysis implements Analysis {
         DependencyGraph graph = context.dependencyGraph();
         if (graph == null) {
             context.diagnostics()
-                    .report("DependencyAnalysis skipped: no dependency graph");
+                    .info("DependencyAnalysis skipped: no dependency graph");
             return;
         }
 

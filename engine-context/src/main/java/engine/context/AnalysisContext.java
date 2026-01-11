@@ -36,9 +36,9 @@ public final class AnalysisContext {
             SymbolTable symbolTable,
             DiagnosticsCollector diagnostics
     ) {
-        this.classIndex = Objects.requireNonNull(classIndex);
-        this.symbolTable = Objects.requireNonNull(symbolTable);
-        this.diagnostics = Objects.requireNonNull(diagnostics);
+        this.classIndex = Objects.requireNonNull(classIndex, "classIndex");
+        this.symbolTable = Objects.requireNonNull(symbolTable, "symbolTable");
+        this.diagnostics = Objects.requireNonNull(diagnostics, "diagnostics");
     }
 
     // === core services ===
@@ -58,15 +58,15 @@ public final class AnalysisContext {
     // === graphs ===
 
     public void setCallGraph(CallGraph callGraph) {
-        this.callGraph = Objects.requireNonNull(callGraph);
-    }
-
-    public void setDependencyGraph(DependencyGraph dependencyGraph) {
-        this.dependencyGraph = Objects.requireNonNull(dependencyGraph);
+        this.callGraph = Objects.requireNonNull(callGraph, "callGraph");
     }
 
     public CallGraph callGraph() {
         return callGraph;
+    }
+
+    public void setDependencyGraph(DependencyGraph dependencyGraph) {
+        this.dependencyGraph = Objects.requireNonNull(dependencyGraph, "dependencyGraph");
     }
 
     public DependencyGraph dependencyGraph() {
@@ -80,15 +80,15 @@ public final class AnalysisContext {
     }
 
     public void setReport(Report report) {
-        this.report = Objects.requireNonNull(report);
+        this.report = Objects.requireNonNull(report, "report");
     }
 
     // === analysis results ===
 
     public <T> void putResult(Class<T> key, T value) {
         results.put(
-                Objects.requireNonNull(key),
-                Objects.requireNonNull(value)
+                Objects.requireNonNull(key, "key"),
+                Objects.requireNonNull(value, "value")
         );
     }
 

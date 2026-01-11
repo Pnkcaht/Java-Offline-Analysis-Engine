@@ -14,7 +14,7 @@ public final class CallGraphAnalysis implements Analysis {
         CallGraph graph = context.callGraph();
         if (graph == null) {
             context.diagnostics()
-                    .report("CallGraphAnalysis skipped: no call graph");
+                    .info("CallGraphAnalysis skipped: no call graph");
             return;
         }
 

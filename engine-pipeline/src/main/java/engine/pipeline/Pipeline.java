@@ -20,7 +20,7 @@ public final class Pipeline {
 
             if (result.isFailure()) {
                 context.diagnostics()
-                        .report("Pipeline stopped: " + result);
+                        .error("Pipeline stopped: " + result);
                 break;
             }
         }
