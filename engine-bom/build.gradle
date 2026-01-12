@@ -1,0 +1,24 @@
+plugins {
+    id 'java-platform'
+}
+
+javaPlatform {
+    allowDependencies()
+}
+
+dependencies {
+    constraints {
+
+        // === Bytecode / analysis ===
+        api("org.ow2.asm:asm:9.6")
+        api("org.ow2.asm:asm-tree:9.6")
+        api("org.ow2.asm:asm-analysis:9.6")
+
+        // === Testing ===
+        api("org.junit.jupiter:junit-jupiter-api:5.10.2")
+        api("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+
+        // === CLI / utils (future-safe) ===
+        api("info.picocli:picocli:4.7.6")
+    }
+}
