@@ -1,4 +1,4 @@
-# Java Offline Analysis Engine
+# 🕵️‍♂️ Java Offline Analysis Engine 
 
 > **Offline, deterministic, Java static analysis engine focused on CI enforcement and architectural rules.**
 
@@ -228,10 +228,10 @@ Senior systems **reserve space before filling it**.
 
 **Engineering maturity:**
 
-* ✅ Modular
-* ✅ Deterministic
-* ✅ CI-oriented
-* ✅ No hidden coupling
+* Modular
+* Deterministic
+* CI-oriented
+* No hidden coupling
 
 **Analysis depth:**
 
