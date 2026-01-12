@@ -5,47 +5,31 @@
 ## Table of Contents
 
 - [Overview](#overview)
-- [What the project does today](#what-the-project-does-today)
-- [What the project explicitly does not do yet](#what-the-project-explicitly-does-not-do-yet)
 
-- [Architecture](#architecture)
-  - [Design principles](#design-principles)
-  - [High-level view](#high-level-view)
-  - [Execution pipeline](#execution-pipeline)
+- [What this project is (today)](#what-this-project-is-today)
+- [What already works (end to end)](#what-already-works-end-to-end)
 
-- [Project modules](#project-modules)
-  - [engine-cli](#engine-cli)
-  - [engine-context](#engine-context)
-  - [engine-io](#engine-io)
-  - [engine-analysis](#engine-analysis)
-    - [Call Graph Analysis](#call-graph-analysis)
-    - [Dependency Analysis](#dependency-analysis)
-    - [Surface Analysis](#surface-analysis)
-  - [engine-pipeline](#engine-pipeline)
-  - [engine-report](#engine-report)
-  - [engine-model](#engine-model)
+- [Architecture overview](#architecture-overview)
 
-- [Execution flow](#execution-flow)
-  - [Context initialization](#context-initialization)
-  - [Classpath scanning](#classpath-scanning)
-  - [Pipeline execution](#pipeline-execution)
-  - [Report generation](#report-generation)
+- [Module-by-module: what exists today](#module-by-module-what-exists-today)
+  - [engine-model](#-engine-model)
+  - [engine-context](#-engine-context)
+  - [engine-io](#-engine-io)
+  - [engine-analysis](#-engine-analysis)
+  - [engine-pipeline](#-engine-pipeline)
+  - [engine-report](#-engine-report)
+  - [engine-cli](#-engine-cli)
 
-- [Reports](#reports)
-  - [Text format](#text-format)
-  - [JSON format](#json-format)
+- [What happens when you run it today](#what-happens-when-you-run-it-today)
 
-- [Diagnostics](#diagnostics)
-  - [Diagnostic types](#diagnostic-types)
-  - [Fail on diagnostics](#fail-on-diagnostics)
+- [What is intentionally incomplete](#what-is-intentionally-incomplete)
 
-- [How to run](#how-to-run)
-  - [Manual compilation](#manual-compilation)
-  - [CLI execution](#cli-execution)
+- [Current maturity level](#current-maturity-level)
 
-- [Current project state](#current-project-state)
-- [Planned next steps](#planned-next-steps)
-- [Professional positioning](#professional-positioning)
+- [Next planned milestone](#next-planned-milestone)
+
+- [Final note](#final-note)
+
 
 ## What this project is (today)
 
