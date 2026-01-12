@@ -27,7 +27,8 @@
 - [Current maturity level](#current-maturity-level)
 
 - [Next planned milestone](#next-planned-milestone)
-
+- [Build and project structure](#build-and-project-structure)
+  - [Key structural decisions](#key-structural-decisions)
 - [Final note](#final-note)
 
 
@@ -256,6 +257,30 @@ Example:
 
 That single rule will immediately elevate this project to **clear senior-level signal**.
 
+## Build and project structure
+
+This project is organized as a multi-module Gradle build.
+
+The root project defines:
+- Java toolchain and compilation rules
+- Versioning and group coordinates
+- Global build behavior
+
+Each module has a clear and isolated responsibility.
+
+### Key structural decisions
+
+- No module depends on `engine-cli`
+- `engine-common` contains only neutral utilities
+- `engine-context` is the shared execution state
+- Analysis, IO, reporting, and pipeline are strictly separated
+- Plugin and platform layers exist independently from the core
+
+This structure allows the engine to evolve safely without
+refactoring its foundation.
+
+---
+
 ## Final note
 
 This repository already demonstrates:
@@ -266,7 +291,5 @@ This repository already demonstrates:
 * Clean separation of concerns
 
 What comes next is **not refactoring** — it’s **adding power**.
-
----
 
 **Status:** Stable foundation. Ready for rule implementation.

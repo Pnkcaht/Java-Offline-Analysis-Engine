@@ -1,0 +1,22 @@
+rootProject.name = "java-offline-analysis-engine"
+
+include(
+        "engine-bom",
+        "engine-platform",
+
+        "engine-common",
+        "engine-model",
+        "engine-context",
+
+        "engine-io",
+        "engine-bytecode",
+
+        "engine-analysis",
+        "engine-pipeline",
+        "engine-report",
+
+        "engine-plugin",
+        "engine-testkit",
+
+        "engine-cli"
+)

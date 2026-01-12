@@ -1,0 +1,27 @@
+plugins {
+    id 'base'
+}
+
+allprojects {
+    group = "engine.offline.analysis"
+    version = "0.1.0-SNAPSHOT"
+}
+
+subprojects {
+    apply plugin: 'java-library'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+        options.release.set(21)
+    }
+
+    repositories {
+        mavenCentral()
+    }
+}
